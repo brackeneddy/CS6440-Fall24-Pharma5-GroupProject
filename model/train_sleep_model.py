@@ -3,16 +3,21 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from save_model import save_model
-
+import glob
+import os
 
 def load_data():
-    activity_df = pd.read_csv('../data/processed/cleaned_daily_activity.csv')
-    heartrate_df = pd.read_csv('../data/processed/cleaned_daily_heartrate.csv')
-    calories_df = pd.read_csv('../data/processed/cleaned_daily_calories.csv')
-    steps_df = pd.read_csv('../data/processed/cleaned_daily_steps.csv')
-    sleep_df = pd.read_csv('../data/processed/cleaned_daily_sleep.csv')
+    def load_processed_data(filename_base):
+        files = glob.glob(f'../data/processed/{filename_base}_part*.csv')
+        dataframes = [pd.read_csv(file) for file in files]
+        return pd.concat(dataframes, ignore_index=True)
 
-    # Ensure the 'date' column exists in all DataFrames
+    activity_df = load_processed_data('cleaned_daily_activity.csv')
+    heartrate_df = load_processed_data('cleaned_daily_heartrate.csv')
+    calories_df = load_processed_data('cleaned_daily_calories.csv')
+    steps_df = load_processed_data('cleaned_daily_steps.csv')
+    sleep_df = load_processed_data('cleaned_daily_sleep.csv')
+
     if 'ActivityDate' in activity_df.columns:
         activity_df.rename(columns={'ActivityDate': 'date'}, inplace=True)
     if 'Time' in heartrate_df.columns:
