@@ -1,26 +1,24 @@
-from flask import Blueprint, render_template, request, jsonify
-from app.models.predictor import predict_sleep_quality
+from flask import Blueprint, request, jsonify
+from app.models.predictor import predict_sleep_score
 
 main = Blueprint('main', __name__)
 
-@main.route('/')
-def home():
-    return "Hello World!" 
-
-@main.route('/predict', methods=['POST'])
-def predict():
-    # Get data from the request
+@main.route('/predict-sleep-score', methods=['POST'])
+def predict_sleep_score_route():
     data = request.json
+    try:
 
-    # Extract necessary features
-    steps = data.get('steps')
-    exercise = data.get('exercise')
-    sedentary_time = data.get('sedentary_time')
-    heart_rate = data.get('resting_heart_rate')
-    calories = data.get('calories_burned')
+        features = [
+            data['TotalSteps'],
+            data['Calories'],
+            data['SedentaryMinutes'],
+            data['FairlyActiveMinutes'],
+            data['VeryActiveMinutes'],
+            data['resting_heart_rate']
+        ]
 
-    # Make the prediction using the machine learning model
-    prediction = predict_sleep_quality(steps, exercise, sedentary_time, heart_rate, calories)
+        prediction = predict_sleep_score(features)
+        return jsonify({'sleep_score': prediction})
 
-    # Return the prediction as JSON
-    return jsonify({'predicted_sleep_quality': prediction})
+    except KeyError as e:
+        return jsonify({'error': f'Missing input parameter: {e}'}), 400

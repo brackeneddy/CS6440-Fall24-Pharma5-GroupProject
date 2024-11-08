@@ -17,14 +17,25 @@ def load_data():
     return df
 
 def evaluate_model():
+    # Load the trained model and scalers
     model = load_model("sleep_model.pkl")
+    scaler_x = load_model("scaler_x.pkl")
+    scaler_y = load_model("scaler_y.pkl")
+    
     df = load_data()
 
     X = df[['TotalSteps', 'Calories', 'SedentaryMinutes', 'FairlyActiveMinutes', 'VeryActiveMinutes', 'resting_heart_rate']]
-    y_true = df['total_sleep_time']
+    y_true = df['total_sleep_time'].values.reshape(-1, 1)
 
-    y_pred = model.predict(X)
-    mse = mean_squared_error(y_true, y_pred)
+    X_scaled = scaler_x.transform(X)
+    
+    y_true_scaled = scaler_y.transform(y_true).ravel()
+
+    # Predict using the scaled features
+    y_pred_scaled = model.predict(X_scaled)
+
+    # Calculate Mean Squared Error between scaled true and predicted values
+    mse = mean_squared_error(y_true_scaled, y_pred_scaled)
     print(f"Evaluation Mean Squared Error: {mse}")
 
 if __name__ == "__main__":

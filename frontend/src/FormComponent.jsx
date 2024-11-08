@@ -45,29 +45,84 @@ export default function FormComponent() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Steps</label>
-          <input type="number" name="steps" onChange={handleChange} /> steps
-        </div>
-        <div>
-          <label>Exercise</label>
-          <input type="number" name="exercise" onChange={handleChange} /> minutes
-        </div>
-        <div>
-          <label>Sedentary Time</label>
-          <input type="number" name="sedentary_time" onChange={handleChange} /> hours
-        </div>
-        <div>
-          <label>Heart Rate</label>
-          <input type="number" name="resting_heart_rate" onChange={handleChange} /> bpm
-        </div>
-        <div>
-          <label>Calories</label>
-          <input type="number" name="calories_burned" onChange={handleChange} /> calories burned
-        </div>
-        <input type="submit" value="View My Sleep" />
-      </form>
+      <div className="max-w-md mx-auto mt-10">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Steps
+            </label>
+            <div className="flex items-center">
+              <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number" 
+                name="steps" 
+                onChange={handleChange} 
+                />
+              <span className="ml-2 text-gray-700">steps</span>
+            </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Exercise
+            </label>
+            <div className="flex items-center">
+              <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number" 
+                name="exercise" 
+                onChange={handleChange} 
+                />
+              <span className="ml-2 text-gray-700">minutes</span>
+            </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Sedentary Time
+            </label>
+            <div className="flex items-center">
+              <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number" 
+                name="sedentary_time" 
+                onChange={handleChange} 
+                />
+              <span className="ml-2 text-gray-700">hours</span>
+            </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Heart Rate
+            </label>
+            <div className="flex items-center">
+              <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number" 
+                name="resting_heart_rate" 
+                onChange={handleChange} 
+                />
+              <span className="ml-2 text-gray-700">bpm</span>
+            </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Calories
+            </label>
+            <div className="flex items-center">
+              <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number" 
+                name="calories_burned" 
+                onChange={handleChange} 
+                />
+              <span className="ml-2 text-gray-700">calories burned</span>
+            </div>
+          </div>
+          <input type="submit" value="View My Sleep" />
+        </form>
+      </div>
     </>
   )
 }
