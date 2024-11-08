@@ -7,8 +7,12 @@ function App() {
 
   return (
     <>
-      <h1>OpenHealth</h1>
+    <div className='bg-gray-100 min-h-screen min-w-screen p-16'>
+      <h1 className="text-6xl font-extrabold text-blue-600">
+        OpenHealth
+      </h1>
       <FormComponent />
+      </div>
     </>
   )
 }
