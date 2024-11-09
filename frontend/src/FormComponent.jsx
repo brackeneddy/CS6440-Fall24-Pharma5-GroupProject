@@ -21,9 +21,8 @@ export default function FormComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //TODO: We might need to enable CORS for flask
     try {
-      const response = await fetch('http://localhost:5000/predict', {
+      const response = await fetch('http://3.84.94.140:5000/predict-sleep-score', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,9 +31,8 @@ export default function FormComponent() {
       });
 
       if (response.ok) {
-        //TODO: Decide on what to do with the response
         const result = await response.json();
-        prediction.value = result.prediction;
+        console.log('sleep score:', result.sleep_score);
       } else {
         console.error("Error:", response.statusText);
       }
@@ -58,7 +56,7 @@ export default function FormComponent() {
               <input 
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="number" 
-                name="steps" 
+                name="TotalSteps" 
                 onChange={handleChange} 
                 />
               <span className="ml-2 text-gray-700">steps</span>
@@ -72,7 +70,21 @@ export default function FormComponent() {
               <input 
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="number" 
-                name="exercise" 
+                name="FairlyActiveMinutes" 
+                onChange={handleChange} 
+                />
+              <span className="ml-2 text-gray-700">minutes</span>
+            </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Exercise
+            </label>
+            <div className="flex items-center">
+              <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number" 
+                name="VeryActiveMinutes" 
                 onChange={handleChange} 
                 />
               <span className="ml-2 text-gray-700">minutes</span>
@@ -86,7 +98,7 @@ export default function FormComponent() {
               <input 
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="number" 
-                name="sedentary_time" 
+                name="SedentaryMinutes" 
                 onChange={handleChange} 
                 />
               <span className="ml-2 text-gray-700">hours</span>
@@ -114,7 +126,7 @@ export default function FormComponent() {
               <input 
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="number" 
-                name="calories_burned" 
+                name="Calories" 
                 onChange={handleChange} 
                 />
               <span className="ml-2 text-gray-700">calories burned</span>
