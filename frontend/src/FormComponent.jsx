@@ -32,6 +32,12 @@ export default function FormComponent() {
 
       if (response.ok) {
         const result = await response.json();
+        const sleepScore = result.sleep_score;
+        const outputContainer = document.getElementById("output");
+        outputContainer.innerHTML = `
+            <h2>Your sleep score is:</h2>
+            <p>${sleepScore}</p>
+        `;
         console.log('sleep score:', result.sleep_score);
       } else {
         console.error("Error:", response.statusText);
@@ -64,7 +70,21 @@ export default function FormComponent() {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Exercise
+              Sedentary Time
+            </label>
+            <div className="flex items-center">
+              <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="number" 
+                name="SedentaryMinutes" 
+                onChange={handleChange} 
+                />
+              <span className="ml-2 text-gray-700">minutes</span>
+            </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Fairly Active Minutes
             </label>
             <div className="flex items-center">
               <input 
@@ -78,7 +98,7 @@ export default function FormComponent() {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Exercise
+              Very Active Minutes
             </label>
             <div className="flex items-center">
               <input 
@@ -92,21 +112,7 @@ export default function FormComponent() {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Sedentary Time
-            </label>
-            <div className="flex items-center">
-              <input 
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                type="number" 
-                name="SedentaryMinutes" 
-                onChange={handleChange} 
-                />
-              <span className="ml-2 text-gray-700">hours</span>
-            </div>
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Heart Rate
+              Resting Heart Rate
             </label>
             <div className="flex items-center">
               <input 
