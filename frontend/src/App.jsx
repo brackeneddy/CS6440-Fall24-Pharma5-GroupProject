@@ -12,7 +12,8 @@ function App() {
         OpenHealth
       </h1>
       <FormComponent />
-      </div>
+      <div id="output"></div>
+    </div>
     </>
   )
 }
