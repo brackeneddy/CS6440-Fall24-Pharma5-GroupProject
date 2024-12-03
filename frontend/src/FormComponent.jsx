@@ -22,7 +22,7 @@ export default function FormComponent() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://3.84.94.140:5000/predict-sleep-score', {
+      const response = await fetch('http://18.233.161.165:5000/predict-sleep-score', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
